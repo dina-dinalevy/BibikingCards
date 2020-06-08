@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeeb39cd0f578474d81b94de9d61586f, type: 3}
+  m_Name: Sara
+  m_EditorClassIdentifier: 
+  image: {fileID: 21300000, guid: b3dc053a8498c8d4eb7e04618f53e2b5, type: 3}
+  title: "\u05E9\u05E8\u05D4"
+  myText: "\u05E2\u05D6\u05D5\u05D1 \u05D4\u05DB\u05DC \u05D5\u05EA\u05D2\u05D9\u05E2
+    \u05D4\u05D1\u05D9\u05EA\u05D4!"
+  opt01: "\u05D8\u05D5\u05D1"
+  opt02: "\u05D8\u05D5\u05D1"

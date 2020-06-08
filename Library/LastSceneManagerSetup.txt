@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/BIBIKING_CARDS.unity
+  isLoaded: 1
+  isActive: 1
