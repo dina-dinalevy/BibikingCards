@@ -36,6 +36,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     string opt01;
     string opt02;
 
+
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();

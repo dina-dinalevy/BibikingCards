@@ -93,7 +93,9 @@ public class SwipeManager : MonoBehaviour {
         Sprite image;
         switch (character)
         {
-            
+            case string a when a.Contains("יאיר"):
+                image = Resources.Load<Sprite>("Characters/yeled");
+                break;
             case string a when a.Contains("רמטכ"):
                 image = Resources.Load<Sprite>("Characters/chief");
                 break;
@@ -112,9 +114,6 @@ public class SwipeManager : MonoBehaviour {
             case string a when a.Contains("ביתן"):
                 image = Resources.Load<Sprite>("Characters/bitan");
                 break;
-            case string a when a.Contains("ישראל"):
-                image = Resources.Load<Sprite>("Characters/bitan");
-                break;
             case string a when a.Contains("טראמפ"):
                 image = Resources.Load<Sprite>("Characters/tramp");
                 break;
@@ -130,18 +129,12 @@ public class SwipeManager : MonoBehaviour {
             case string a when a.Contains("גנץ"):
                 image = Resources.Load<Sprite>("Characters/gantz");
                 break;
-            case string a when a.Contains("יאיר"):
-                image = Resources.Load<Sprite>("Characters/yeled");
-                break;
-            case string a when a.Contains("שקד"):
-                image = Resources.Load<Sprite>("Characters/michaeli");
-                break;
             case string a when a.Contains("כלב"):
                 image = Resources.Load<Sprite>("Characters/dog");
                 break;
 
             default:
-                image = Resources.Load<Sprite>("Characters/Peretz");// fallback
+                image = Resources.Load<Sprite>("Characters/yeled");// fallback
                 Debug.Log("default image for character: "+ character);
                 break;
         }
