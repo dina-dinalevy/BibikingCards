@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\database\bibiCard.cs" />
     <Compile Include="Assets\Scripts\database\DataLoader.cs" />
+    <Compile Include="Assets\Scripts\ParamsManager.cs" />
     <Compile Include="Assets\Scripts\Swipeable.cs" />
     <Compile Include="Assets\Scripts\SwipeManager.cs" />
     <Compile Include="Assets\unity-excel-importer-master-2\Assets\ExcelImporter\Example\Scripts\Entity\MstItemEntity.cs" />

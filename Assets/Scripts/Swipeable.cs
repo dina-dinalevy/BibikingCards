@@ -95,11 +95,13 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (rectTransform.position.x > rightBufferPosition)
         {
+            // when choosing right
             StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3((startPosition.x * 2) + 200f, 0, 0), 0.2f));
             StartCoroutine(ShowNextCard(true));
         }
         else if (rectTransform.position.x < leftBufferPosition)
         {
+            // when choosing left
             StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(-(startPosition.x * 2), 0, 0), 0.2f));
             StartCoroutine(ShowNextCard(false));
         }

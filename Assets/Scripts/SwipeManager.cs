@@ -14,9 +14,9 @@ public class SwipeManager : MonoBehaviour {
     [SerializeField] bibiCards bibiCards;
     List<Card> allCards = new List<Card>();// loaded on start via excel list (dina)
     //public List<Card> allCards;// before - dragged
-    
-    
-    
+
+
+    public ParamsManager paramsManager;
     public Swipeable currentCard;
 
     private int currentCardIndex = 0;
@@ -30,6 +30,8 @@ public class SwipeManager : MonoBehaviour {
         foreach (bibiCard c in bibiCards.UnitySheet)
         {
             Card tmp = ScriptableObject.CreateInstance<Card>();
+            
+            tmp.name = c.id.ToString();// "id" field added to cards using empty field "name"
             tmp.title = c.Character;
             tmp.myText = c.Text;
             tmp.opt01 = c.Left;
@@ -38,7 +40,6 @@ public class SwipeManager : MonoBehaviour {
 
             tmp.image = GetCardImage(tmp.title);
             //tmp.image = Resources.Load<Sprite>("Characters/Yeled");
-
 
             //AssetDatabase.CreateAsset(tmp, "Assets/Cards/tmp.asset");// if we needed actual asset (dina)
             allCards.Add(tmp);
@@ -65,6 +66,9 @@ public class SwipeManager : MonoBehaviour {
 
     void CardSwiped(bool liked)
     {
+        if (currentCardIndex < allCards.Count)
+            SwipeEffect(currentCardIndex, liked); // swiping ight or left affects the game status parameters
+        
         Debug.Log("Image: " + allCards[currentCardIndex].image.name + " liked? " + liked);
         currentCardIndex += 1;
 
@@ -82,6 +86,7 @@ public class SwipeManager : MonoBehaviour {
         if (currentCardIndex >= allCards.Count)
         {
             Debug.Log("finished!");
+            // stop the game....
         }
     }
 
@@ -146,6 +151,23 @@ public class SwipeManager : MonoBehaviour {
         }
         return image;
     }
-  
+
+
+    #region BibiLogic
+
+    void SwipeEffect(int currentCardIndex, bool isRight)
+    {
+        if (allCards[currentCardIndex].name == null)
+            return;
+
+        int id = int.Parse(allCards[currentCardIndex].name);
+        bibiCard currBibiCard = bibiCards.UnitySheet.Find(x => x.id == id);
+        int WishCardId = paramsManager.SwipeEffectOnParams(currBibiCard, isRight);
+    }
+
+
+
+    #endregion
+    
 
 }

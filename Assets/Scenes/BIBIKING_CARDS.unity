@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -723,6 +723,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678239354}
   m_CullTransparentMesh: 0
+--- !u!1 &721888780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721888782}
+  - component: {fileID: 721888781}
+  m_Layer: 0
+  m_Name: ParamsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721888781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721888780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e3779fa1f784189b1d9568a8af6c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bibicard:
+    id: 0
+    character: 
+    text: 
+    right: 
+    left: 
+    affectOnPR1: 0
+    affectOnPR2: 0
+    affectOnPR3: 0
+    affectOnPR4: 0
+    affectOnPL1: 0
+    affectOnPL2: 0
+    affectOnPL3: 0
+    affectOnPL4: 0
+    category: 
+    weight: 0
+  gameParams:
+  - {fileID: 782097639}
+  - {fileID: 785767719}
+  - {fileID: 678239356}
+  - {fileID: 1192264474}
+  numOfCards: 21
+  midParamEffect: 2.5
+--- !u!4 &721888782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721888780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -48.385616, y: 13.768974, z: 88.901695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &782097637
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +849,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.564
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1295,6 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bibiCards: {fileID: 11400000, guid: bc5c5d92e75ce43a69348eda11d31cc0, type: 2}
+  paramsManager: {fileID: 721888781}
   currentCard: {fileID: 1533232454}
 --- !u!114 &1105543051
 MonoBehaviour:
