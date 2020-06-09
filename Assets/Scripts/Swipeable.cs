@@ -65,18 +65,21 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData data)
     {
         currentPosition = data.position + offset;
-        transform.position = currentPosition;
+
+          transform.position = currentPosition; 
+     transform.rotation = Quaternion.Euler(0, 0, -transform.localPosition.x*0.05f);
+        Debug.Log("-transform.position.x*0.05f " + -transform.localPosition.x);
         /*
         rectTransform.position = new Vector2(currentPosition.x, startPosition.y);
         if (rectTransform.position.x > startPosition.x)
         {
             var positionOffset = 20 * ((startPosition.x - rectTransform.position.x) / startPosition.x);
-            gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
+           // gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
         }
         else
         {
             var positionOffset = 20 * ((startPosition.x - rectTransform.position.x) / startPosition.x);
-            gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
+        //    gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
         }
 
         if (rectTransform.position.x > rightBufferPosition)
