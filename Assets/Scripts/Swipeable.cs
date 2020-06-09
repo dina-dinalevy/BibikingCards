@@ -65,6 +65,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData data)
     {
         currentPosition = data.position + offset;
+        transform.position = currentPosition;
+        /*
         rectTransform.position = new Vector2(currentPosition.x, startPosition.y);
         if (rectTransform.position.x > startPosition.x)
         {
@@ -89,6 +91,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             yesNoBanner.GetComponent<Animator>().SetBool("showBanner", false);
         }
+        */
     }
 
     public void OnEndDrag(PointerEventData eventData)
