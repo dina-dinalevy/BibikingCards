@@ -775,6 +775,11 @@ MonoBehaviour:
   - {fileID: 1192264474}
   numOfCards: 21
   midParamEffect: 2.5
+  topThreshold: 0.8
+  bottomThreshold: 0.3
+  normalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  topColor: {r: 0, g: 0, b: 1, a: 1}
+  bottomColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &721888782
 Transform:
   m_ObjectHideFlags: 0
@@ -849,7 +854,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 0.702
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

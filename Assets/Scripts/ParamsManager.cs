@@ -13,8 +13,16 @@ public class ParamsManager : MonoBehaviour
     
     [SerializeField] private int numOfCards=21;
     [SerializeField] private float midParamEffect = 2.5f; //middle level
-    
-    
+    [SerializeField] private float topThreshold = 0.9f;
+    [SerializeField] private float bottomThreshold = 0.2f; 
+    [SerializeField] private Color normalColor = Color.yellow; 
+    [SerializeField] private Color topColor = Color.blue; 
+    [SerializeField] private Color bottomColor = Color.red; 
+
+
+
+    private bool [] isTopThresholds = new bool [] {false, false, false, false}; 
+    private bool [] isBottomThresholds = new bool [] {false, false, false, false};
     private float [] valParams = new float [] {0.5f, 0.5f, 0.5f, 0.5f}; 
     private float unitEffect;
 
@@ -26,6 +34,7 @@ public class ParamsManager : MonoBehaviour
         {
             valParams[i] = 0.5f;
             gameParams[i].fillAmount = 0.5f;
+            gameParams[i].color = normalColor;
         }
         unitEffect = 0.5f / (midParamEffect * numOfCards);
     }
@@ -44,6 +53,8 @@ public class ParamsManager : MonoBehaviour
             Debug.Log("val:" + vals[i] + " rowEffect:" + rowEffect + " unitEffect:"+unitEffect+" effect:" + effect + " valParam:" + valParams[i]);
             
             gameParams[i].fillAmount += effect;
+
+            CheckThreshold(i);
         }
 
         int wishCardId = -1;
@@ -68,8 +79,57 @@ public class ParamsManager : MonoBehaviour
             vals[2] = currBibiCard.affectOnPL3;
             vals[3] = currBibiCard.affectOnPL4;
         }
-
+        
         return vals;
     }
-    
+
+
+    void CheckThreshold(int paramInd)
+    {
+        // bottom Thresholds
+        if (gameParams[paramInd].fillAmount < bottomThreshold && !isBottomThresholds[paramInd])
+        {
+            // crossing the threshold down
+            isBottomThresholds[paramInd] = true;
+            gameParams[paramInd].color = bottomColor;
+            
+            OnBottomThresholdExcceded(paramInd);// message?
+        }
+        else if (gameParams[paramInd].fillAmount >= bottomThreshold && isBottomThresholds[paramInd])
+        {
+            // crossing the threshold back up
+            isBottomThresholds[paramInd] = false;
+            gameParams[paramInd].color = normalColor;
+        }
+        // Top thresholds
+        else if (gameParams[paramInd].fillAmount > topThreshold && !isTopThresholds[paramInd])
+        {
+            // crossing the threshold up
+            isTopThresholds[paramInd] = true;
+            gameParams[paramInd].color = topColor;
+            
+            OnTopThresholdExcceded(paramInd);// message?
+        }
+        else if (gameParams[paramInd].fillAmount <= topThreshold && isTopThresholds[paramInd])
+        {
+            // crossing the threshold back up
+            isTopThresholds[paramInd] = false;
+            gameParams[paramInd].color = normalColor;
+        }
+    }
+
+    void OnBottomThresholdExcceded(int paramInd)
+    {
+        // encoragment text card can be displayed
+        Debug.Log("param "+paramInd+ " just crossed the bottom threshold ");
+    }
+
+    void OnTopThresholdExcceded(int paramInd)
+    {
+        // warning text card can be displayed
+        Debug.Log("param "+paramInd+ " just crossed the Top threshold");
+    }
+
+
+
 }
