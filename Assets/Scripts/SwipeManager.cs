@@ -24,27 +24,22 @@ public class SwipeManager : MonoBehaviour {
     
 	void Start()
     {
-
+        bool isLastExists = false;
+        bibiCard tmpLastCard = new bibiCard();
+        
         // reading the excel structure (dina)
         Debug.Log(bibiCards.UnitySheet.Count);
         foreach (bibiCard c in bibiCards.UnitySheet)
         {
-            Card tmp = ScriptableObject.CreateInstance<Card>();
-            
-            tmp.name = c.id.ToString();// "id" field added to cards using empty field "name"
-            tmp.title = c.Character;
-            tmp.myText = c.Text;
-            tmp.opt01 = c.Left;
-            tmp.opt02 = c.Right;
-            Debug.Log("next allCards: " + tmp.title + " " + tmp.myText);
-
-            tmp.image = GetCardImage(tmp.title);
-            //tmp.image = Resources.Load<Sprite>("Characters/Yeled");
-
-            //AssetDatabase.CreateAsset(tmp, "Assets/Cards/tmp.asset");// if we needed actual asset (dina)
-            allCards.Add(tmp);
+            if (c.weight == 10)
+            {
+                // this card should be last in the game - adding it after the shuffle
+                tmpLastCard = c;
+                isLastExists = true;
+            }
+            else
+                CreateCard(c);
         }
-        
         
         for (int i = 0; i < allCards.Count; i++)
         {
@@ -54,7 +49,11 @@ public class SwipeManager : MonoBehaviour {
             allCards[randomIndex] = temp;
         }
         
-
+        if (isLastExists)
+        {
+            CreateCard(tmpLastCard);
+        }
+        
         // currentCard.SetCardIcon(allCards[currentCardIndex].image);
         Debug.Log("CARD TITLE " + allCards[currentCardIndex].title);
         currentCard.SetCardData(allCards[currentCardIndex]);
@@ -63,6 +62,21 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 
+    void CreateCard(bibiCard c)
+    {
+        Card tmp = ScriptableObject.CreateInstance<Card>();
+            
+        tmp.name = c.id.ToString();// "id" field added to cards using empty field "name"
+        tmp.title = c.Character;
+        tmp.myText = c.Text;
+        tmp.opt01 = c.Left;
+        tmp.opt02 = c.Right;
+        Debug.Log("next allCards: " + tmp.title + " " + tmp.myText);
+        tmp.image = GetCardImage(tmp.title);
+
+        allCards.Add(tmp);
+    }
+    
 
     void CardSwiped(bool liked)
     {
