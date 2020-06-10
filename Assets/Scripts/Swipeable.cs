@@ -22,8 +22,9 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public TMP_Text cardTitle;
     public TMP_Text cardText;
     public TMP_Text optionText;
-
-
+    public TMP_Text staticRightText;
+    public TMP_Text staticLeftText;
+    
     public GameObject rearCard;
 
     public GameObject yesNoBanner;
@@ -95,6 +96,30 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             yesNoBanner.GetComponent<Animator>().SetBool("showBanner", false);
         }
         */
+        
+        
+        if (rectTransform.rotation.z > 0)
+        {
+            staticRightText.text = opt01;
+            staticLeftText.text = "";
+        }
+        else if (rectTransform.rotation.z < 0)
+        {
+            staticRightText.text = "";
+            staticLeftText.text = opt02;
+        }
+        else
+        {
+            staticRightText.text = "";
+            staticLeftText.text = "";
+        }
+        
+        
+        
+        
+        
+        
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -115,6 +140,9 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             StartCoroutine(MoveObject(rectTransform.localPosition, Vector3.zero, 0.2f));
         }
+        
+        staticRightText.text = "";
+        staticLeftText.text = "";
     }
 
     public void SetCardIcon(Sprite image)
