@@ -148,19 +148,36 @@ public class SwipeManager : MonoBehaviour {
             case string a when a.Contains("גנץ"):
                 image = Resources.Load<Sprite>("Characters/gantz");
                 break;
+            case string a when a.Contains("שקד"):
+                image = Resources.Load<Sprite>("Characters/ayelet");
+                break;
+            case string a when a.Contains("פוטין"):
+                image = Resources.Load<Sprite>("Characters/putin");
+                break;
+            case string a when a.Contains("יניב"):
+                image = Resources.Load<Sprite>("Characters/sapar");
+                break;
+            case string a when a.Contains("אוחנה"):
+                image = Resources.Load<Sprite>("Characters/ohana");
+                break;
+            case string a when a.Contains("זאב"):
+                image = Resources.Load<Sprite>("Characters/zeev");
+                break;
+            case string a when a.Contains("מפכ"):
+                image = Resources.Load<Sprite>("Characters/mafkal");
+                break;
             case string a when a.Contains("כלב"):
                 image = Resources.Load<Sprite>("Characters/dog");
                 break;
-
             default:
-                image = Resources.Load<Sprite>("Characters/yeled");// fallback
+                image = Resources.Load<Sprite>("Characters/dog");// fallback
                 Debug.Log("default image for character: "+ character);
                 break;
         }
 
         if (image == null)
         {
-            image = Resources.Load<Sprite>("Characters/sara"); //fallback
+            image = Resources.Load<Sprite>("Characters/dog"); //fallback
             Debug.Log("Image do not exist: " + character);
         }
         return image;
