@@ -81,7 +81,7 @@ public class SwipeManager : MonoBehaviour {
     void CardSwiped(bool liked)
     {
         if (currentCardIndex < allCards.Count)
-            SwipeEffect(currentCardIndex, liked); // swiping ight or left affects the game status parameters
+            SwipeEffect(currentCardIndex, liked); // swiping right or left affects the game status parameters
         
         Debug.Log("Image: " + allCards[currentCardIndex].image.name + " liked? " + liked);
         currentCardIndex += 1;
@@ -94,7 +94,7 @@ public class SwipeManager : MonoBehaviour {
          
         if (currentCardIndex == allCards.Count - 1) 
         {
-            currentCard.SetLastCard();
+            currentCard.SetLastCard();  //..... wrong position of last card
         } 
 
         if (currentCardIndex >= allCards.Count)
@@ -194,9 +194,16 @@ public class SwipeManager : MonoBehaviour {
         int id = int.Parse(allCards[currentCardIndex].name);
         bibiCard currBibiCard = bibiCards.UnitySheet.Find(x => x.id == id);
         int WishCardId = paramsManager.SwipeEffectOnParams(currBibiCard, isRight);
+        if (WishCardId == 0)
+            EndGameDueParam();
     }
 
 
+    void EndGameDueParam()
+    {
+        Debug.Log(" End game due to Parameter full or empty");
+        //.........
+    }
 
     #endregion
     

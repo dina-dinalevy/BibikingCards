@@ -11,13 +11,14 @@ public class ParamsManager : MonoBehaviour
     public Image [] gameParams;
         
     
-    [SerializeField] private int numOfCards=21;
-    [SerializeField] private float midParamEffect = 2.5f; //middle level
+    [SerializeField] private int maxCardsDeltaEffect=8;// influencing delta effect. how many full cards up or down
+    [SerializeField] private float midParamEffect = 5f; //middle level of param value
     [SerializeField] private float topThreshold = 0.9f;
     [SerializeField] private float bottomThreshold = 0.2f; 
     [SerializeField] private Color normalColor = Color.yellow; 
     [SerializeField] private Color topColor = Color.blue; 
-    [SerializeField] private Color bottomColor = Color.red; 
+    [SerializeField] private Color bottomColor = Color.red;
+    [SerializeField] private float fillSignalTime = 2f;
 
 
 
@@ -36,12 +37,12 @@ public class ParamsManager : MonoBehaviour
             gameParams[i].fillAmount = 0.5f;
             gameParams[i].color = normalColor;
         }
-        unitEffect = 0.5f / (midParamEffect * numOfCards);
+        unitEffect = 0.5f / (midParamEffect * maxCardsDeltaEffect);
     }
     
     public int SwipeEffectOnParams(bibiCard currBibiCard, bool isRight)
     {
-
+        bool isParamExceeded = false;
         int[] vals = GetEffectVals(currBibiCard, isRight);
         Debug.Log("SwipeEffectOnParams cardId: "+ currBibiCard.Id+" " +vals[0]+" " +vals[1]+" " +vals[2]+" " +vals[3]);
 
@@ -53,12 +54,41 @@ public class ParamsManager : MonoBehaviour
             Debug.Log("val:" + vals[i] + " rowEffect:" + rowEffect + " unitEffect:"+unitEffect+" effect:" + effect + " valParam:" + valParams[i]);
             
             gameParams[i].fillAmount += effect;
-
+            
             CheckThreshold(i);
+
+            if (valParams[i] <= 0 || valParams[i] >= 1)
+                isParamExceeded = true; 
         }
 
-        int wishCardId = -1;
+        StartCoroutine(SignalUpDown(gameParams, vals));
+        
+        int wishCardId = -1;// no wish for next moove
+        if (isParamExceeded)
+            wishCardId = 0;// next move fulfills parameter full/empty => end game
+
         return wishCardId;
+    }
+    
+     
+     IEnumerator SignalUpDown( Image [] parameters, int[] values)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            float rowEffect = values[i] - midParamEffect;
+
+            if (rowEffect > 0)
+                gameParams[i].color = topColor;
+            else if (rowEffect < 0)
+                gameParams[i].color = bottomColor;
+        }
+        
+        yield return new WaitForSeconds(fillSignalTime);
+
+        for (int i = 0; i < 4; i++)
+        {
+            gameParams[i].color = normalColor;
+        }
     }
     
     
@@ -79,7 +109,6 @@ public class ParamsManager : MonoBehaviour
                 possibleEffects[i] = 2;
             else 
                 possibleEffects[i] = 1;
-            Debug.Log("possibleEffects:" + i + " " +possibleEffects[i] );
         }
 
         return possibleEffects;

@@ -425,7 +425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 68}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324119057
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c01b1938a05844fb29f3aa60cf390a12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f58536c76c5e1464282853fbb8dd0df5, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29bbcbfa8ee824f439fd561c629a7111, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae52b604013874993aa54c6ff1b4521f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 479860899}
   - component: {fileID: 479860898}
   m_Layer: 5
-  m_Name: icon (1)
+  m_Name: P2 - Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1194,13 +1194,14 @@ MonoBehaviour:
   - {fileID: 785767719}
   - {fileID: 678239356}
   - {fileID: 1192264474}
-  numOfCards: 10
-  midParamEffect: 2.5
-  topThreshold: 0.9
-  bottomThreshold: 0.1
+  maxCardsDeltaEffect: 6
+  midParamEffect: 5
+  topThreshold: 1
+  bottomThreshold: 0
   normalColor: {r: 0.9811321, g: 0.9800258, b: 0.96724814, a: 1}
   topColor: {r: 0, g: 1, b: 0.10618591, a: 1}
   bottomColor: {r: 1, g: 0, b: 0, a: 1}
+  fillSignalTime: 0.7
 --- !u!4 &721888782
 Transform:
   m_ObjectHideFlags: 0
@@ -1372,7 +1373,7 @@ GameObject:
   - component: {fileID: 934679060}
   - component: {fileID: 934679059}
   m_Layer: 5
-  m_Name: icon (2)
+  m_Name: P3 - StartDavid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1890,7 +1891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5be83c53d8fdf4f3e95c2a1969379759, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5b774623ebfa4caa94ae6fc0ed33f99, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2034,7 +2035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29745f0bee394426d8043ac95854084b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae52b604013874993aa54c6ff1b4521f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2369,7 +2370,7 @@ GameObject:
   - component: {fileID: 1319028419}
   - component: {fileID: 1319028421}
   m_Layer: 5
-  m_Name: icon
+  m_Name: P1- Tsahal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2656,7 +2657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 267ad5310747140968c8bc90cdcaa561, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f58536c76c5e1464282853fbb8dd0df5, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2728,7 +2729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 267ad5310747140968c8bc90cdcaa561, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f58536c76c5e1464282853fbb8dd0df5, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3114,7 +3115,7 @@ GameObject:
   - component: {fileID: 1880181832}
   - component: {fileID: 1880181831}
   m_Layer: 5
-  m_Name: icon (3)
+  m_Name: P4 - Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

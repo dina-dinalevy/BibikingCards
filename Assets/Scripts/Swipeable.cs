@@ -63,7 +63,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (!lastCard)
         {
-            rearCard.SetActive(true);
+            rearCard.SetActive(true);//....... 
         }
         GetComponent<Animator>().enabled = false;
         offset = rectTransform.position - new Vector3(eventData.position.x, eventData.position.y, 0);
@@ -75,7 +75,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         transform.position = currentPosition; 
         transform.rotation = Quaternion.Euler(0, 0, -transform.localPosition.x*0.05f);
-        Debug.Log("-transform.position.x*0.05f " + -transform.localPosition.x);
+        //Debug.Log("-transform.position.x*0.05f " + -transform.localPosition.x);
         /*
         rectTransform.position = new Vector2(currentPosition.x, startPosition.y);
         if (rectTransform.position.x > startPosition.x)
@@ -108,27 +108,34 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             staticRightText.text = opt01;
             staticLeftText.text = "";
-            ShowExpectedEffect(true);
+            ShowExpectedEffect(false);
         }
         else if (rectTransform.rotation.z < 0)
         {
             staticRightText.text = "";
             staticLeftText.text = opt02;
-            ShowExpectedEffect(false);
+            ShowExpectedEffect(true);
 
         }
         else
         {
-            staticRightText.text = "";
-            staticLeftText.text = "";
-            for (int i = 0; i < 4; i++)
-            {
-                effectSmallMarkers[i].SetActive(false);
-                effectLargeMarkers[i].SetActive(false);
-            }
+            ResetDragInfo();
         }
 
     }
+
+
+    void ResetDragInfo()
+    {
+        staticRightText.text = "";
+        staticLeftText.text = "";
+        for (int i = 0; i < 4; i++)
+        {
+            effectSmallMarkers[i].SetActive(false);
+            effectLargeMarkers[i].SetActive(false);
+        }
+    }
+    
 
 
     void ShowExpectedEffect(bool isRight)
@@ -178,13 +185,17 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             StartCoroutine(MoveObject(rectTransform.localPosition, Vector3.zero, 0.2f));
         }
         
-        staticRightText.text = "";
-        staticLeftText.text = "";
+        ResetDragInfo();
     }
 
     public void SetCardIcon(Sprite image)
     {
         cardImage.sprite = image;
+        for (int i = 0; i < 4; i++)
+        {
+            effectSmallMarkers[i].SetActive(false);
+            effectLargeMarkers[i].SetActive(false);
+        }
     }
 
     public void SetCardData(Card card)
