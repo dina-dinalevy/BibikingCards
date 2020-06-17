@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ParamsManager : MonoBehaviour
 {
     //to drag
-    public bibiCard bibicard;
+    [SerializeField] bibiCards bibiCards;
     public Image [] gameParams;
         
     
@@ -59,6 +59,30 @@ public class ParamsManager : MonoBehaviour
 
         int wishCardId = -1;
         return wishCardId;
+    }
+    
+    
+    // for marking the parameters that will be afftected - when swiping to each direction
+    public int [] MarkPossibleEffects(int currentCardId, bool isRight)
+    {
+
+        bibiCard currBibiCard = bibiCards.UnitySheet.Find(x => x.id == currentCardId);
+
+        int[] vals = GetEffectVals(currBibiCard, isRight);
+        
+        int [] possibleEffects = new int[] {0,0,0,0};
+        for (int i = 0; i < 4; i++)
+        {
+            if (vals[i] == midParamEffect)// no effect
+                possibleEffects[i] = 0;
+            else if (vals[i] == midParamEffect*2 || vals[i] == 0)// extreme effect
+                possibleEffects[i] = 2;
+            else 
+                possibleEffects[i] = 1;
+            Debug.Log("possibleEffects:" + i + " " +possibleEffects[i] );
+        }
+
+        return possibleEffects;
     }
 
 

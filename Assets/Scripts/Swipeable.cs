@@ -6,6 +6,11 @@ using TMPro;
 
 public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
+    //to drag
+    [SerializeField] private ParamsManager paramsManager;
+    [SerializeField] private GameObject [] effectSmallMarkers; 
+    [SerializeField] private GameObject [] effectLargeMarkers; 
+
     private Vector2 offset;
     private Vector2 currentPosition;
     private Vector2 startPosition;
@@ -33,9 +38,10 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public CardSwipedDelegate CardSwipedDelegate;
 
 
-
+    private int cardId;
     string opt01;
     string opt02;
+    int [] paramPossibleAffect;
 
 
 
@@ -67,8 +73,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         currentPosition = data.position + offset;
 
-          transform.position = currentPosition; 
-     transform.rotation = Quaternion.Euler(0, 0, -transform.localPosition.x*0.05f);
+        transform.position = currentPosition; 
+        transform.rotation = Quaternion.Euler(0, 0, -transform.localPosition.x*0.05f);
         Debug.Log("-transform.position.x*0.05f " + -transform.localPosition.x);
         /*
         rectTransform.position = new Vector2(currentPosition.x, startPosition.y);
@@ -102,25 +108,56 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             staticRightText.text = opt01;
             staticLeftText.text = "";
+            ShowExpectedEffect(true);
         }
         else if (rectTransform.rotation.z < 0)
         {
             staticRightText.text = "";
             staticLeftText.text = opt02;
+            ShowExpectedEffect(false);
+
         }
         else
         {
             staticRightText.text = "";
             staticLeftText.text = "";
+            for (int i = 0; i < 4; i++)
+            {
+                effectSmallMarkers[i].SetActive(false);
+                effectLargeMarkers[i].SetActive(false);
+            }
         }
-        
-        
-        
-        
-        
-        
-        
+
     }
+
+
+    void ShowExpectedEffect(bool isRight)
+    {
+        int[] possibleEffects = paramsManager.MarkPossibleEffects(cardId, isRight);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (possibleEffects[i] == 1)
+            {
+                // signaling that this option will cause small effect
+                effectSmallMarkers[i].SetActive(true);
+                effectLargeMarkers[i].SetActive(false);
+
+            }
+            else if (possibleEffects[i] == 2)
+            {
+                // signaling that this option will cause large effect
+                effectSmallMarkers[i].SetActive(false);
+                effectLargeMarkers[i].SetActive(true);
+            }
+            else
+            {
+                effectSmallMarkers[i].SetActive(false);
+                effectLargeMarkers[i].SetActive(false);
+            }
+        }
+    }
+
 
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -152,7 +189,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void SetCardData(Card card)
     {
-        
+        cardId = int.Parse(card.name);
         cardText.text = card.myText;
         cardTitle.text = card.title;
         opt01 = card.opt01;
@@ -213,4 +250,6 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         yesNoBanner.GetComponent<Animator>().SetBool("showBanner", true);
         optionText.text = opt02;
     }
+    
+    
 }
