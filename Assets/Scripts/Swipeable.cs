@@ -27,6 +27,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public TMP_Text cardTitle;
     public TMP_Text cardText;
     public TMP_Text optionText;
+
+    public Animator staticPanelAnimator;
     public TMP_Text staticRightText;
     public TMP_Text staticLeftText;
     
@@ -51,8 +53,9 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         startPosition = rectTransform.position;
 
         var totalScreenWidth = startPosition.x * 2;
-        leftBufferPosition = totalScreenWidth * (leftRightBufferPercentage / 100f);
-        rightBufferPosition = totalScreenWidth * ((100f - leftRightBufferPercentage) / 100f);
+        leftBufferPosition = -60f;//totalScreenWidth * (leftRightBufferPercentage / 100f);
+        rightBufferPosition = 60f;//totalScreenWidth * ((100f - leftRightBufferPercentage) / 100f);
+        ResetDragInfo();
     }
 
     public void SetLastCard() {
@@ -104,14 +107,16 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         */
         
         
-        if (rectTransform.rotation.z > 0)
+        if (rectTransform.localPosition.x > rightBufferPosition)
         {
+            staticPanelAnimator.SetBool("showBanner", true);
             staticRightText.text = opt01;
             staticLeftText.text = "";
             ShowExpectedEffect(false);
         }
-        else if (rectTransform.rotation.z < 0)
+        else if (rectTransform.localPosition.x < leftBufferPosition)
         {
+            staticPanelAnimator.SetBool("showBanner", true);
             staticRightText.text = "";
             staticLeftText.text = opt02;
             ShowExpectedEffect(true);
@@ -119,6 +124,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         else
         {
+            staticPanelAnimator.SetBool("showBanner", false);
             ResetDragInfo();
         }
 
@@ -168,21 +174,21 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (rectTransform.position.x > rightBufferPosition)
+        if (rectTransform.localPosition.x > rightBufferPosition)
         {
             // when choosing right
-            StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3((startPosition.x * 2) + 200f, 0, 0), 0.2f));
+            StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(1500f, -300, 0), 0.2f));
             StartCoroutine(ShowNextCard(true));
         }
-        else if (rectTransform.position.x < leftBufferPosition)
+        else if (rectTransform.localPosition.x < leftBufferPosition)
         {
             // when choosing left
-            StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(-(startPosition.x * 2), 0, 0), 0.2f));
+            StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(-1500f, -300, 0), 0.2f));
             StartCoroutine(ShowNextCard(false));
         }
         else
         {
-            StartCoroutine(MoveObject(rectTransform.localPosition, Vector3.zero, 0.2f));
+            StartCoroutine(MoveObject(rectTransform.localPosition, Vector3.zero, 0.1f));
         }
         
         ResetDragInfo();
@@ -215,8 +221,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         while (Time.time < startTime + overTime)
         {
             rectTransform.localPosition = Vector3.Lerp(source, target, (Time.time - startTime) / overTime);
-            var positionOffset = 20 * ((startPosition.x - rectTransform.position.x) / startPosition.x);
-            gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
+         //   var positionOffset = 20 * ((startPosition.x - rectTransform.loca.x) / startPosition.x);
+         //   gameObject.transform.localRotation = Quaternion.Euler(0, 0, positionOffset);
             yield return null;
         }
         rectTransform.localPosition = target;
