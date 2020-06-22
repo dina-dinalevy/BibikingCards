@@ -4,8 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/BIBIKING_CARDS.unity
-    guid: 25386d7d465662c44ab982636cad4d7f
+  m_Scenes: []
   m_configObjects: {}

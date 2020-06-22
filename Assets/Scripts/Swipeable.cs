@@ -26,13 +26,13 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Image cardImage;
     public TMP_Text cardTitle;
     public TMP_Text cardText;
-
+    public TMP_Text optionText;
     public TMP_Text staticRightText;
     public TMP_Text staticLeftText;
     
     public GameObject rearCard;
 
-
+    public GameObject yesNoBanner;
 
 
     public CardSwipedDelegate CardSwipedDelegate;
@@ -63,7 +63,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (!lastCard)
         {
-           // rearCard.SetActive(true);//
+            rearCard.SetActive(true);//....... 
         }
         GetComponent<Animator>().enabled = false;
         offset = rectTransform.position - new Vector3(eventData.position.x, eventData.position.y, 0);
@@ -225,7 +225,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     IEnumerator ShowNextCard(bool liked)
     {
-       // yesNoBanner.GetComponent<Animator>().SetBool("showBanner", false);
+        yesNoBanner.GetComponent<Animator>().SetBool("showBanner", false);
         yield return new WaitForSeconds(0.2f);
         if (!lastCard)
         {
@@ -251,15 +251,15 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     void ShowYesBanner()
     {
 
-     //   yesNoBanner.GetComponent<Animator>().SetBool("showBanner", true);
-       // optionText.text = opt01;
+        yesNoBanner.GetComponent<Animator>().SetBool("showBanner", true);
+        optionText.text = opt01;
     }
 
     void ShowNoBanner()
     {
 
-      //  yesNoBanner.GetComponent<Animator>().SetBool("showBanner", true);
-      //  optionText.text = opt02;
+        yesNoBanner.GetComponent<Animator>().SetBool("showBanner", true);
+        optionText.text = opt02;
     }
     
     
