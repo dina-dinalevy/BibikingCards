@@ -8,21 +8,24 @@ using UnityEditor.iOS.Xcode;
 
 public delegate void CardSwipedDelegate(bool liked);
 
-public class SwipeManager : MonoBehaviour {
-    
+public class SwipeManager : MonoBehaviour
+{
     [SerializeField] bibiCards bibiCards;
     List<Card> allCards = new List<Card>();// loaded on start via excel list (dina)
     //public List<Card> allCards;// before - dragged
-
-
+    
+    public BeginEndManager beginEndManager;
     public ParamsManager paramsManager;
     public Swipeable currentCard;
 
     private int currentCardIndex = 0;
+
+
     
     
 	void Start()
     {
+        Debug.Log("SwipeManager.Start()");
         bool isLastExists = false;
         bibiCard tmpLastCard = new bibiCard();
         
@@ -99,7 +102,7 @@ public class SwipeManager : MonoBehaviour {
         if (currentCardIndex >= allCards.Count)
         {
             Debug.Log("finished!");
-            // stop the game....
+            beginEndManager.EndGame(8);
         }
     }
 
@@ -192,16 +195,32 @@ public class SwipeManager : MonoBehaviour {
 
         int id = int.Parse(allCards[currentCardIndex].name);
         bibiCard currBibiCard = bibiCards.UnitySheet.Find(x => x.id == id);
-        int WishCardId = paramsManager.SwipeEffectOnParams(currBibiCard, isRight);
-        if (WishCardId == 0)
-            EndGameDueParam();
+        
+        int wishCardId = paramsManager.SwipeEffectOnParams(currBibiCard, isRight);
+        
+        if (wishCardId >= 1000)
+        {
+            EndGameDueParam(wishCardId);
+        }
     }
 
 
-    void EndGameDueParam()
+    void EndGameDueParam(int wishCardId)
     {
-        Debug.Log(" End game due to Parameter full or empty");
-        //.........
+        //endingParamIndex: order is from left to right starting with 0
+        //isEndingParamEmpty: true for empty (down); false for full (up)
+
+        // decoding cause for ending the game
+        //=====================================
+        Debug.Log("WishCardId "+wishCardId);
+        // one of the parameters reached a limit (up or down)
+        int endingParamIndex = (int) (wishCardId - 1000) / 10;
+        int paramVal = wishCardId - 1000 - endingParamIndex*10;
+        Debug.Log(" End game due to Parameter: Index: "+endingParamIndex+ " param Val: "+ paramVal);
+
+        int endMessageIndex = endingParamIndex * 2 + paramVal;
+        
+        beginEndManager.EndGame(endMessageIndex);
     }
 
     #endregion

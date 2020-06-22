@@ -7,9 +7,11 @@ using System.Linq;
 public class DataLoader : MonoBehaviour
 {
     [SerializeField] bibiCards cards;
-
+    
+    
     void Awake()
     {
+        Debug.Log("DatabaseLoader.Awake()");
         ShowItems();
     }
 

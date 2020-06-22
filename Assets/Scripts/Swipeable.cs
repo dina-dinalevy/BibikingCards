@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -46,9 +47,10 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     int [] paramPossibleAffect;
 
 
-
+    
     void Start()
     {
+        Debug.Log("Swipeable.Start()");
         rectTransform = GetComponent<RectTransform>();
         startPosition = rectTransform.position;
 

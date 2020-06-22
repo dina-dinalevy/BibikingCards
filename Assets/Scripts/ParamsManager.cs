@@ -19,6 +19,8 @@ public class ParamsManager : MonoBehaviour
     [SerializeField] private Color topColor = Color.blue; 
     [SerializeField] private Color bottomColor = Color.red;
     [SerializeField] private float fillSignalTime = 2f;
+    [SerializeField] private float thresholdEmpty = 0.08f;
+    [SerializeField] private float thresholdFull = 0.92f;
 
 
 
@@ -28,8 +30,15 @@ public class ParamsManager : MonoBehaviour
     private float unitEffect;
 
 
-    private void Start()
+    /*void OnEnable()
     {
+        Start();
+    }*/
+    
+    void Start()
+    {
+        Debug.Log("ParamsManager.Start()");
+        
         // fill range is  0-1, starting with middle value
         for (int i = 0; i < 4; i++)
         {
@@ -42,7 +51,6 @@ public class ParamsManager : MonoBehaviour
     
     public int SwipeEffectOnParams(bibiCard currBibiCard, bool isRight)
     {
-        bool isParamExceeded = false;
         int[] vals = GetEffectVals(currBibiCard, isRight);
         Debug.Log("SwipeEffectOnParams cardId: "+ currBibiCard.Id+" " +vals[0]+" " +vals[1]+" " +vals[2]+" " +vals[3]);
 
@@ -51,26 +59,57 @@ public class ParamsManager : MonoBehaviour
             float rowEffect = vals[i] - midParamEffect;
             float effect = rowEffect * unitEffect;
             valParams[i] += effect;
+            if (valParams[i] <= thresholdEmpty)
+                valParams[i] = 0;
+            else if (valParams[i] >= thresholdFull)
+                valParams[i] = 1;
             Debug.Log("val:" + vals[i] + " rowEffect:" + rowEffect + " unitEffect:"+unitEffect+" effect:" + effect + " valParam:" + valParams[i]);
             
             gameParams[i].fillAmount += effect;
             
             CheckThreshold(i);
-
-            if (valParams[i] <= 0 || valParams[i] >= 1)
-                isParamExceeded = true; 
         }
+        
+        int wishCardId = CheckEndGame();
 
         StartCoroutine(SignalUpDown(gameParams, vals));
         
-        int wishCardId = -1;// no wish for next moove
-        if (isParamExceeded)
-            wishCardId = 0;// next move fulfills parameter full/empty => end game
+        return wishCardId;
+    }
+
+
+    int CheckEndGame()
+    {
+        int wishCardId = -1;
+        
+        for (int i = 0; i < 4; i++)
+        {
+            // priority to empty over Full
+            if (valParams[i] <= 0)
+            {
+                // formula for coding the cause for ending the game - decoded in SwipeManager.SwipeEffect
+                //==================================================
+                wishCardId = 1000 + i*10 + (int)valParams[i]; // next move fulfills parameter full/empty => end game
+                break;
+            }
+        }
+        if (wishCardId < 0)
+            for (int i = 0; i < 4; i++)
+            {
+                if (valParams[i] >= 1)
+                {
+                    // formula for coding the cause for ending the game - decoded in SwipeManager.SwipeEffect
+                    //==================================================
+                    wishCardId = 1000 + i*10 + (int)valParams[i];// next move fulfills parameter full/empty => end game
+                    break;
+                }
+            }
 
         return wishCardId;
     }
     
-     
+    
+    
      IEnumerator SignalUpDown( Image [] parameters, int[] values)
     {
         for (int i = 0; i < 4; i++)
