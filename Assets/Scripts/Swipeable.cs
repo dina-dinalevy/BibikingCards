@@ -18,9 +18,9 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     private RectTransform rectTransform;
 
-    private float leftRightBufferPercentage = 30f;
-    private float leftBufferPosition;
-    private float rightBufferPosition;
+    //private float leftRightBufferPercentage = 30f;
+    public float leftBufferPosition = -40f;
+    public float rightBufferPosition = 40f;
 
     private bool lastCard = false;
 
@@ -55,8 +55,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         startPosition = rectTransform.position;
 
         var totalScreenWidth = startPosition.x * 2;
-        leftBufferPosition = -60f;//totalScreenWidth * (leftRightBufferPercentage / 100f);
-        rightBufferPosition = 60f;//totalScreenWidth * ((100f - leftRightBufferPercentage) / 100f);
+        //totalScreenWidth * ((100f - leftRightBufferPercentage) / 100f);
         ResetDragInfo();
     }
 
