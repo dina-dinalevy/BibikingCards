@@ -180,12 +180,14 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             // when choosing right
             StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(1500f, -300, 0), 0.2f));
             StartCoroutine(ShowNextCard(true));
+            staticPanelAnimator.SetBool("showBanner", false);
         }
         else if (rectTransform.localPosition.x < leftBufferPosition)
         {
             // when choosing left
             StartCoroutine(MoveObject(rectTransform.localPosition, new Vector3(-1500f, -300, 0), 0.2f));
             StartCoroutine(ShowNextCard(false));
+            staticPanelAnimator.SetBool("showBanner", false);
         }
         else
         {
