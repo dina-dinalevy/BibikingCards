@@ -10,7 +10,10 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     //to drag
     [SerializeField] private ParamsManager paramsManager;
     [SerializeField] private GameObject [] effectSmallMarkers; 
-    [SerializeField] private GameObject [] effectLargeMarkers; 
+    [SerializeField] private GameObject [] effectLargeMarkers;
+    [SerializeField] private AudioSource soundClick;
+    [SerializeField] private AudioSource soundWhoosh;
+
 
     private Vector2 offset;
     private Vector2 currentPosition;
@@ -45,6 +48,8 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     string opt01;
     string opt02;
     int [] paramPossibleAffect;
+    private bool isSwipeClicked=false;
+
 
 
     
@@ -71,6 +76,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         GetComponent<Animator>().enabled = false;
         offset = rectTransform.position - new Vector3(eventData.position.x, eventData.position.y, 0);
+        isSwipeClicked = false;
     }
 
     public void OnDrag(PointerEventData data)
@@ -114,6 +120,11 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             staticRightText.text = opt01;
             staticLeftText.text = "";
             ShowExpectedEffect(false);
+            if (!isSwipeClicked)
+            {
+                soundClick.Play();
+                isSwipeClicked = true;
+            }
         }
         else if (rectTransform.localPosition.x < leftBufferPosition)
         {
@@ -121,12 +132,17 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             staticRightText.text = "";
             staticLeftText.text = opt02;
             ShowExpectedEffect(true);
-
+            if (!isSwipeClicked)
+            {
+                soundClick.Play();
+                isSwipeClicked = true;
+            }
         }
         else
         {
             staticPanelAnimator.SetBool("showBanner", false);
             ResetDragInfo();
+            isSwipeClicked = false;
         }
 
     }
@@ -195,6 +211,7 @@ public class Swipeable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         
         ResetDragInfo();
+        soundWhoosh.Play();
     }
 
     public void SetCardIcon(Sprite image)
