@@ -8,6 +8,7 @@
         <e p="bibi-DoNotMove.cs" t="Include" />
         <e p="bibiCards.cs" t="Include" />
         <e p="Excel" t="Include">
+          <e p="bibiCards copy.xlsx.txt" t="Include" />
           <e p="bibiCards V1 -OK.xlsx.txt" t="Include" />
         </e>
         <e p="rigid.cs" t="Include" />

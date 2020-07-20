@@ -132,7 +132,7 @@ public class SwipeManager : MonoBehaviour
             case string a when a.Contains("עמיר פרץ"):
                 image = Resources.Load<Sprite>("Characters/peretz");
                 break;
-            case string a when a.Contains("ביתן"):
+            case string a when a.Contains("ביטן"):
                 image = Resources.Load<Sprite>("Characters/bitan");
                 break;
             case string a when a.Contains("טראמפ"):
