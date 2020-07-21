@@ -590,7 +590,7 @@ C:/_UNITY/git/BibikingCards/obj/Debug/Assembly-CSharp.pdb
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp.csproj.CopyComplete
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp.dll
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp.pdb
-/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/Boo.Lang.dll
-/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEditor.UI.dll
-/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEditor.UI.dll.mdb
-/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEditor.UI.xml
+/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEngine.SpatialTrackingModule.dll
+/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEngine.WebGLModule.dll
+/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEngine.SpatialTrackingModule.dll.mdb
+/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEngine.SpatialTrackingModule.xml

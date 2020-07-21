@@ -417,3 +417,4 @@
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp-Editor.csproj.CopyComplete
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp-Editor.dll
 /Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/obj/Debug/Assembly-CSharp-Editor.pdb
+/Users/dinalevy-new/Dropbox/part 3/courses 3/unity files/Git/BibikingCards/Temp/bin/Debug/UnityEngine.WebGLModule.dll

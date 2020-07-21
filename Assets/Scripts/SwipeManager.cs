@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.iOS.Xcode;
+//using UnityEditor.iOS.Xcode;
 
 // for run time creation of assets(dina)
 
