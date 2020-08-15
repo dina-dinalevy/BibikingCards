@@ -51,7 +51,9 @@ public class ParamsManager : MonoBehaviour
     
     public int SwipeEffectOnParams(bibiCard currBibiCard, bool isRight)
     {
-        int[] vals = GetEffectVals(currBibiCard, isRight);
+        // on swipe left - the text is shown on the right
+        // therefore swipe left chooses the right option
+        int[] vals = GetEffectVals(currBibiCard, !isRight);
         Debug.Log("SwipeEffectOnParams cardId: "+ currBibiCard.Id+" " +vals[0]+" " +vals[1]+" " +vals[2]+" " +vals[3]);
 
         for (int i = 0; i < 4; i++)
@@ -72,7 +74,7 @@ public class ParamsManager : MonoBehaviour
         
         int wishCardId = CheckEndGame();
 
-        StartCoroutine(SignalUpDown(gameParams, vals));
+        StartCoroutine(SignalUpDown(vals));
         
         return wishCardId;
     }
@@ -110,7 +112,7 @@ public class ParamsManager : MonoBehaviour
     
     
     
-     IEnumerator SignalUpDown( Image [] parameters, int[] values)
+     IEnumerator SignalUpDown( int[] values)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -121,8 +123,9 @@ public class ParamsManager : MonoBehaviour
             else if (rowEffect < 0)
                 gameParams[i].color = bottomColor;
         }
-        
+        Debug.Log("SignalUpDown "+values[0]+" "+values[1]+" "+values[2]+" "+values[3]);
         yield return new WaitForSeconds(fillSignalTime);
+        Debug.Log("SignalUpDown "+values[0]+" "+values[1]+" "+values[2]+" "+values[3]);
 
         for (int i = 0; i < 4; i++)
         {
@@ -139,6 +142,9 @@ public class ParamsManager : MonoBehaviour
 
         int[] vals = GetEffectVals(currBibiCard, isRight);
         
+        Debug.Log("MarkPossibleEffects cardId: "+ currBibiCard.Id+" " +vals[0]+" " +vals[1]+" " +vals[2]+" " +vals[3]);
+
+        
         int [] possibleEffects = new int[] {0,0,0,0};
         for (int i = 0; i < 4; i++)
         {
@@ -149,6 +155,9 @@ public class ParamsManager : MonoBehaviour
             else 
                 possibleEffects[i] = 1;
         }
+        
+        Debug.Log("MarkPossibleEffects cardId: "+ currBibiCard.Id+" " +possibleEffects[0]+" " +possibleEffects[1]+" " +possibleEffects[2]+" " +possibleEffects[3]);
+
 
         return possibleEffects;
     }
